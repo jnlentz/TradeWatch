@@ -1,0 +1,9 @@
+venv/
+instance/
+__pycache__/
+*.sqlite
+*.cpython-310.pyc
+config.py
+*.json
+*.csv
+*.pkl
