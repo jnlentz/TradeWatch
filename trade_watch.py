@@ -5,10 +5,9 @@ import json
 import os
 import time
 from datetime import datetime
-from binance import AsyncClient
 import config  # Your config file
 
-# Markets to monitor (start with 3 to manage load)
+# Markets to monitor
 MARKETS = ['ADAUSDT', 'ETHUSDT', 'BTCUSDT']
 
 # Ensure directories exist
@@ -31,7 +30,7 @@ def init_db(market):
     conn.commit()
     return conn
 
-# Fetch order book data via REST API
+# Fetch order book data via REST API (no API key needed)
 async def fetch_order_book(session, market):
     url = f"https://api.binance.com/api/v3/depth?symbol={market}&limit=20"
     try:
@@ -84,7 +83,7 @@ async def monitor_order_books():
             # Log progress
             print(f"[{datetime.now()}] Fetched and stored order books for {MARKETS}")
             
-            # Control fetch frequency (1-second intervals)
+            # Control fetch frequency (1-second intervals, adjustable)
             elapsed = time.time() - start_time
             await asyncio.sleep(max(0, 1.0 - elapsed))
 
